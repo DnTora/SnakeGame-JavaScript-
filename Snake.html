@@ -1,5 +1,5 @@
 <html>
-<canvas id="GameSnake" width="800" height="800" ></canvas>
+<canvas id="GameSnake" width="120" height="120" ></canvas>
 <script>
 var canvas;
 var random; 
@@ -31,7 +31,7 @@ window.onload = function(){
      
      body.push(new SnakeBody(0,40));
      
-     var framePerSecond = 20;
+     var framePerSecond = 1;
      setInterval(function(){
             
                              
@@ -208,6 +208,10 @@ if(snakeHead.x == fruit.x && snakeHead.y == fruit.y){
      score++;
     
      random = new RandomNums();
+      while(fruitCordnaite(random.x,random.y) != "true")
+       {
+                random = new RandomNums();      
+        }
      body.push(new SnakeBody(fruit.x,fruit.y));
      fruit.x = random.x;
      fruit.y = random.y;
@@ -219,7 +223,19 @@ if(snakeHead.x == fruit.x && snakeHead.y == fruit.y){
 
 
 
+function fruitCordnaite(num1 , num2){
+     
+   if(snakeHead.x == num1 && snakeHead.y == num2)
+             return "false";
+   for(var r in body)
+        {
+                    if(body[r].x == num1 && body[r].y == num2)
+                             return "false";
+   }
+return "true";
 
+
+}
 
 
 function RandomNums(){
